@@ -4,9 +4,11 @@ import google from "../assets/google.jpg"
 import {IoEyeOutline} from "react-icons/io5"
 import {IoEye} from "react-icons/io5"
 import { useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 function Login() {
   const[show, setShow] = useState(false)
+  const navigate = useNavigate
      return (
          <div className='bg-[#dddbdb] w-[100vw] h-[100vh] flex items-center justify-center gap-3'>
              <form className='w-[90%] md:w-200 h-150 bg-[white] shadow-xl rounded-2xl flex'>
@@ -40,7 +42,9 @@ function Login() {
                      </div>
                       */}
  
-                     <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px]'>Login</button>
+                     <button className='w-[80%] h-[40px] bg-black text-white cursor-pointer flex items-center justify-center rounded-[5px] cursor-pointer' >Login</button>
+
+                     <span className='text-[13px] cursor-pointer text-[#585757]'>Forget your password ?</span>
  
                      <div className='w-[80%] flex items-center gap-2'>
                          <div className='w-[25%] h-[0.5px] bg-[#c4c4c4]'></div>
@@ -53,6 +57,10 @@ function Login() {
                          <span className='text-[18px] text-gray-500'>Google</
                          span>
                      </div>
+
+                     <div className='text-[#6f6f6f]'> Create new account
+                        <span className='underline underline-offset-1 text-[black]' onClick={()=>navigate("/signup")}>SignUp</span>
+                    </div>
  
                  </div>
  
