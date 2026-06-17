@@ -6,7 +6,9 @@ import cookieParser from 'cookie-parser'
 import authRouter from "./route/authRoute.js"
 dotenv.config()
 import cors from "cors"
+import userRouter from "./route/userRoute.js"
 
+console.log(process.env.MONGODB_URI);
 
 const port = process.env.PORT
 const app = express()
@@ -23,6 +25,7 @@ app.use(cors({
 
 
 app.use("/api/auth",authRouter)
+app.use("/api/user",userRouter)
 
 app.get("/",(req,res)=>{
     res.send("hello from server")
