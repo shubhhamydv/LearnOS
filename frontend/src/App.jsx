@@ -10,6 +10,7 @@ import { ToastContainer } from "react-toastify"
 import getCurrentUser from './customHooks/getCurrentUser'
 import { useSelector } from 'react-redux'
 
+
 function App() {
 
   getCurrentUser()
