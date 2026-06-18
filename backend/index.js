@@ -8,7 +8,7 @@ dotenv.config()
 import cors from "cors"
 import userRouter from "./route/userRoute.js"
 
-console.log(process.env.MONGODB_URI);
+
 
 const port = process.env.PORT
 const app = express()

@@ -62,7 +62,7 @@ function Login() {
     }
   return (
     <div className='bg-[#dddbdb] w-[100vw] h-[100vh] flex items-center justify-center gap-3'>
-      <form className='w-[90%] md:w-200 h-150 bg-[white] shadow-xl rounded-2xl flex'onSubmit={(e)=>e.preventDefault}>
+      <form className='w-[90%] md:w-200 h-150 bg-[white] shadow-xl rounded-2xl flex'onSubmit={(e)=>e.preventDefault()}>
         
         {/* Left div */}
         <div className='md:w-[50%] w-[100%] h-[100%] flex flex-col items-center justify-center gap-3'>
@@ -121,7 +121,7 @@ function Login() {
           */}
 
           <button className='w-[80%] h-[40px] bg-black text-white flex items-center justify-center rounded-[5px] cursor-pointer' disabled={loading} onClick={handleLogin}>
-            {loading ?  <ClipLoader size={30} color='white' />: Login}
+            {loading ?  <ClipLoader size={30} color='white' />: "Login"}
           </button>
 
           <span className='text-[13px] cursor-pointer text-[#585757]' onClick={()=>navigate("/forget")}>

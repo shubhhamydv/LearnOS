@@ -7,7 +7,7 @@ const genToken = (userId) => {
             process.env.JWT_SECRET,
             { expiresIn: "7d" }
         );
-          console.log("Token =", token);
+         
         return token;
 
     } catch (error) {
