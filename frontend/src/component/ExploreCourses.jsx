@@ -60,7 +60,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#fcb9c8] rounded-lg flex items-center justify-center  ' >
 
-                    <MdAppShortcut className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <MdAppShortcut className=' w-[50px] h-[50px] text-[#6d6c6c] ' />
 
                 </div>
 
@@ -72,7 +72,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#fbd9fb] rounded-lg flex items-center justify-center  ' >
 
-                    <FaHackerrank className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <FaHackerrank className=' w-[55px] h-[55px] text-[#6d6c6c] ' />
 
                 </div>
 
@@ -96,7 +96,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#4ce4ff] rounded-lg flex items-center justify-center  ' >
 
-                    <SiGoogledataproc className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <SiGoogledataproc className=' w-[50px] h-[50px] text-[#6d6c6c] ' />
 
                 </div>
 
@@ -108,7 +108,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#ff8d57] rounded-lg flex items-center justify-center  ' >
 
-                    <BsClipboardData className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <BsClipboardData className=' w-[50px] h-[50px] text-[#6d6c6c] ' />
 
                 </div>
 
@@ -120,7 +120,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#ffb4ff] rounded-lg flex items-center justify-center  ' >
 
-                    <SiOpenaigym className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <SiOpenaigym className=' w-[50px] h-[50px] text-[#6d6c6c] ' />
 
                 </div>
 
