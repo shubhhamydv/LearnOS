@@ -4,7 +4,7 @@ import { TbDeviceDesktopAnalytics } from 'react-icons/tb';
 import { LiaUikit } from "react-icons/lia";
 import { MdAppShortcut } from "react-icons/md";
 import { FaHackerrank } from 'react-icons/fa6';
-import { AiFillOpenAi } from 'reat-icons/ai';
+import { FaRobot } from "react-icons/fa";
 import { SiGoogledataproc } from 'react-icons/si';
 import { BsClipboardData } from "react-icons/bs";
 import { SiOpenaigym } from 'react-icons/si';
@@ -84,7 +84,7 @@ function ExploreCourses() {
 
                 <div className='w-[100px] h-[90px] bg-[#ffa836] rounded-lg flex items-center justify-center  ' >
 
-                    <AiFillOpenAi className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
+                    <FaRobot className=' w-[60px] h-[60px] text-[#6d6c6c] ' />
 
                 </div>
 

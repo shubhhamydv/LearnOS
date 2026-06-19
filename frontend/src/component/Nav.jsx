@@ -46,7 +46,7 @@ function Nav() {
               : <div className='w-[50px] h-[50px] rounded-full text-white flex items-center justify-center text-[20px] border-2 bg-black border-white cursor-pointer' onClick={()=>setShow(prev=>!prev)}>
                 {userData?.name.slice(0,1).toUpperCase()}
               </div>}
-        {  userData?.role === "educator" &&  <div className='px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer '>Dashboard</div>  }
+        {  userData?.role === "educator" &&  <div className='px-[20px] py-[10px] border-2 border-white text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer 'onClick={()=>navigate("/dashboard")}>Dashboard</div>  }
               {!userData ? <span className='px-[20px] py-[10px] border-2 border-white text-white rounded-[10px] text-[18px] font-light cursor-pointer bg-[#000000d5]' onClick={()=>navigate("/login")}>Login</span>:
                <span className='px-[20px] py-[10px] bg-white text-black rounded-[10px] shadow-sm shadow-black text-[18px] cursor-pointer' onClick={handleLogOut}>LogOut</span>}
 
@@ -70,7 +70,7 @@ function Nav() {
 
               <div className='w-[200px] h-[65px] border-2 border-white text-white bg-[black] flex items-center justify-center rounded-[10px] text-[18px] font-light cursor-pointer '  onClick={()=>navigate("/profile")}>My Profile</div> 
                <div className='w-[200px] h-[65px] border-2 border-white text-white bg-[black] flex items-center justify-center rounded-[10px] text-[18px] font-light cursor-pointer '>My Courses</div> 
-               {  userData?.role === "educator" &&  <div className='w-[200px] h-[65px] border-2 border-white flex items-center justify-center text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer '>Dashboard</div>  }
+               {  userData?.role === "educator" &&  <div className='w-[200px] h-[65px] border-2 border-white flex items-center justify-center text-white bg-[black] rounded-[10px] text-[18px] font-light cursor-pointer 'onClick={()=>navigate("/dashboard")}>Dashboard</div>  }
                 {!userData ? <span className='w-[200px] h-[65px] border-2 border-white text-white bg-[black] flex items-center justify-center rounded-[10px] text-[18px] font-light cursor-pointer ' onClick={()=>navigate("/login")}>Login</span>:
                <span className='w-[200px] h-[65px] border-2 border-white text-white bg-[black] flex items-center justify-center rounded-[10px] text-[18px] font-light cursor-pointer ' onClick={handleLogOut}>LogOut</span>}
             </div>

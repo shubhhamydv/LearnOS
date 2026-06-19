@@ -13,12 +13,12 @@ const courseSchema = new mongoose.Schema({
     },
 
      category:{
-        type:String
+        type:String,
         required:true
     },
 
      level:{
-        type:String
+        type:String,
         enum:["Beginner" ,'Intermediate' , 'Advanced']
     },
 
