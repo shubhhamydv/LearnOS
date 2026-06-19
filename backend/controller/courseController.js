@@ -1,4 +1,5 @@
-import uploadOnCloudinary from "../config/cloundinary"
+import uploadOnCloudinary from "../config/cloudinary.js"
+import Course from "../model/courseModel.js"
 
 export const createCourse = async (req, res) => {
     try {
@@ -8,12 +9,13 @@ export const createCourse = async (req, res) => {
         }
         const course = await Course.create({
             title,
-            description,
+            category,
             creator:req.userId
         })
         return res.status(201).json(course)
     } catch (error) {
-        return res.status(500).json({message:`updateProfile error &{error}`})
+        console.log(error)
+        return res.status(500).json({message:`Create Course error ${error.message}`})
     }
 }
 
@@ -46,8 +48,8 @@ export const getCreateCourses = async (req,res) => {
 export const editCourse = async (req,res) => {
     try {
         const {courseId} = req.params
-      const {title,subtitle,description,category,level,price,thumbnail}= req.body
-      const thumbnail
+      const {title,subtitle,description,category,level,price}= req.body
+      let thumbnail;
       if(req.file){
         thumbnail = await uploadOnCloudinary(req.file.path)
       }
@@ -56,7 +58,8 @@ export const editCourse = async (req,res) => {
        if(!courses){
             return res.status(400).json({message:"Courses is not found"})
         }
-        const updateData =  {title,subtitle,description,category,level,price,thumbnail}
+        const updateData =  {title,subtitle,description,category,level,price}
+         if (thumbnail) updateData.thumbnail = thumbnail
 
         course = await Course.findByIdAndUpdate(courseId,updateData,{new:true})
         return res.status(200).json(course)
@@ -68,7 +71,8 @@ export const editCourse = async (req,res) => {
 
 export const getCourseById = async (req,res) => {
     try {
-        const {courseId = await Course.findById(courseId)}
+        const { courseId } = req.params
+        const course = await Course.findById(courseId)
          if(!courses){
             return res.status(400).json({message:"Courses is not found"})
         }
