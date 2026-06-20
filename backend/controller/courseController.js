@@ -21,7 +21,7 @@ export const createCourse = async (req, res) => {
 
 export const getPublishedCourses = async (req,res) => {
     try {
-        const courses = await Courses.find({isPublished:true})
+        const courses = await Course.find({isPublished:true})
 
         if(!courses){
             return res.status(400).json({message:"Courses is not found"})
@@ -35,7 +35,7 @@ export const getPublishedCourses = async (req,res) => {
 export const getCreateCourses = async (req,res) => {
     try {
         const userId = req.userId
-        const courses = await Courses.find({creator:userId})
+        const courses = await Course.find({creator:userId})
          if(!courses){
             return res.status(400).json({message:"Courses is not found"})
         }
@@ -54,7 +54,7 @@ export const editCourse = async (req,res) => {
         thumbnail = await uploadOnCloudinary(req.file.path)
       }
 
-      let couses = await Course.findById(courseId)
+      let courses = await Course.findById(courseId)
        if(!courses){
             return res.status(400).json({message:"Courses is not found"})
         }
@@ -73,7 +73,7 @@ export const getCourseById = async (req,res) => {
     try {
         const { courseId } = req.params
         const course = await Course.findById(courseId)
-         if(!courses){
+         if(!course){
             return res.status(400).json({message:"Courses is not found"})
         }
         return res.status(200).json(course)
