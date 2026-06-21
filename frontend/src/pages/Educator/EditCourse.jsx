@@ -23,6 +23,7 @@ const [frontendImage,setFrontendImage] = useState(img)
 const [backendImage,setBackendImage] = useState("")
 const [price ,setPrice] = useState("")
 const [loading,setLoading] = useState(false)
+const [loading1,setLoading1] = useState(false)
 
 
 const handleThumbnail = (e)=>{
@@ -84,6 +85,23 @@ const handleEditCourse = async (req,res) => {
     toast.error(error.response.data.message)
   }
 }
+    const handleRemoveCourse = async()=>{
+       setLoading1(true)
+      try {
+        const result = await axiios.delete(serverUrl + `/api/course/remove/${courseId}`, {withCredentials:true})
+        console.log(result.data)
+        setLoading1(false)
+        toast.success("Course Removed")
+        navigate("/courses")
+       
+      } catch (error) {
+        console.log(error)
+        setLoading1(false)
+        toast.error(error.response.data.message)
+        
+      }
+    }
+
   return (
     <div className='max-w-5xl mx-auto p-6 mt-10 bg-white rounded-lg shadow-md'>
       {/* top bar */}
@@ -135,6 +153,7 @@ const handleEditCourse = async (req,res) => {
           <button
             type="button"
             className='bg-red-600 text-white px-4 py-2 rounded-md'
+            onClick={handleRemoveCourse}
           >
             Remove Course
           </button>
