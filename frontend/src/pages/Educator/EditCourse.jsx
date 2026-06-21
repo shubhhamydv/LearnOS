@@ -18,7 +18,7 @@ function EditCourse() {
 const [selectCourse,setSelectCourse] = useState(null)
 const [title,setTitle] = useState("")
 const [subTitle,setSubTitle] = useState("")
-const [Description,setDescribtion] = useState("")
+const [Description,setDescription] = useState("")
 const [category,setCategory ] = useState("")
 const [level,setLevel] = useState("")
 const [frontendImage,setFrontendImage] = useState(img)
@@ -52,10 +52,10 @@ useEffect(()=>{
   if(selectCourse){
     setTitle(selectCourse.title || "")
     setSubTitle(selectCourse.subTitle || "")
-    setDescribtion(selectCourse.description || "")
+    setDescription(selectCourse.description || "")
     setLevel(selectCourse.level || "")
     setPrice(selectCourse.price || "")
-    setFrontendImage(selectCourse.thumbnail || "")
+    setFrontendImage(selectCourse.thumbnail || img)
     setIsPublished(selectCourse?.isPublished )
    
   }
@@ -68,17 +68,17 @@ useEffect(()=>{
 
 const handleEditCourse = async (req,res) => {
   setLoading(true)
- const formData = new formData()
+ const formData = new FormData()
  formData.append('title' ,title)
- formData.append('subTitle', subTitle)
- formData.append('description',description)
+ formData.append('subtitle', subTitle)
+ formData.append('description',Description)
  formData.append('category',category)
  formData.append('level',level)
  formData.append('price',price)
- formData.append(thumbnail,backendImage)
+ formData.append('thumbnail',backendImage)
  formData.append('isPublished',isPublished)
   try {
-    const result = await axios.post(serverUrl+`/api/course/editcourse/${courseId},`,formData,{withCredentials:true})
+    const result = await axios.post(serverUrl+`/api/course/editcourse/${courseId}`,formData,{withCredentials:true})
     console.log(result.data)
 
     const updateData = result.data
@@ -90,11 +90,11 @@ const handleEditCourse = async (req,res) => {
 
         updateCourses.push(updateData)
       }
-      dispatch(setCourseData(updateCourse))
+      dispatch(setCourseData(updateCourses))
     }
     else{
       const filterCourses = courseData.filter(c => c._id !==courseId)
-      dispatch(setCourseData(filterCourse))
+      dispatch(setCourseData(filterCourses))
 
     
     }
@@ -106,14 +106,14 @@ const handleEditCourse = async (req,res) => {
     toast.success("course Updated")
   } catch (error) {
     console.log(error)
-    setLoading(flase)
+    setLoading(false)
     toast.error(error.response.data.message)
   }
 }
     const handleRemoveCourse = async()=>{
        setLoading1(true)
       try {
-        const result = await axiios.delete(serverUrl + `/api/course/remove/${courseId}`, {withCredentials:true})
+        const result = await axios.delete(serverUrl + `/api/course/remove/${courseId}`, {withCredentials:true})
         console.log(result.data)
         const filterCourses = courseData.filter(c => c._id !==courseId)
         dispatch(setCourseData(filterCourses))
@@ -124,7 +124,8 @@ const handleEditCourse = async (req,res) => {
       } catch (error) {
         console.log(error)
         setLoading1(false)
-        toast.error(error.response.data.message)
+        toast.error(
+          error.response?.data?.message || error.message)
         
       }
     }
@@ -216,13 +217,15 @@ const handleEditCourse = async (req,res) => {
               type="text"
               className='w-full border px-4 py-2 rounded-md'
               placeholder='Course Subtitle'
+              value={subTitle}
+              onChange={(e)=>setSubTitle(e.target.value)}
             />
           </div>
 
           <div>
             <label
               htmlFor="des"
-              className='block text-sm font-medium text-gray-700 mb-1'onChange={(e)=>setDescribtion(e.target.value)} value={description}
+              className='block text-sm font-medium text-gray-700 mb-1'onChange={(e)=>setDescription(e.target.value)} value={Description}
             >
               Description
             </label>
@@ -231,17 +234,19 @@ const handleEditCourse = async (req,res) => {
               id='des'
               className='w-full border px-4 py-2 rounded-md h-24 resize-none'
               placeholder='Course Description'
+              value={Description}
+              onChange={(e)=>setDescription(e.target.value)}
             ></textarea>
           </div>
 
           <div className='flex flex-col sm:flex-row sm:space-x-4 space-y-4 sm:space-y-0'>
             {/* category */}
             <div className='flex-1'>
-              <label className='block text-sm font-medium text-gray-700 mb-1'> onChange={(e)=>setCategoryc(e.target.value)} value={category}
+              <label className='block text-sm font-medium text-gray-700 mb-1'>
                 Course Category
               </label>
 
-              <select className='w-full border px-4 py-2 rounded-md bg-white'>
+              <select className='w-full border px-4 py-2 rounded-md bg-white'onChange={(e)=>setCategory(e.target.value)} value={category}>
                 <option value="">Select Category</option>
                 <option value="App Development">App Development</option>
                 <option value="AI/ML">AI/ML</option>
@@ -257,11 +262,10 @@ const handleEditCourse = async (req,res) => {
 
             {/* level */}
             <div className='flex-1'>
-              <label className='block text-sm font-medium text-gray-700 mb-1'onChange={(e)=>setLevel(e.target.value)} value={level}>
+              <label className='block text-sm font-medium text-gray-700 mb-1'>
                 Course Level
               </label>
-
-              <select className='w-full border px-4 py-2 rounded-md bg-white'>
+              <select className='w-full border px-4 py-2 rounded-md bg-white' onChange={(e)=>setLevel(e.target.value)} value={level}>
                 <option value="">Select Level</option>
                 <option value="Beginner">Beginner</option>
                 <option value="Intermediate">Intermediate</option>
@@ -324,7 +328,7 @@ const handleEditCourse = async (req,res) => {
               type="submit"
               className='bg-black text-white px-7 py-2 rounded-md hover:bg-gray-500 cursor-pointer'onClick={handleEditCourse}
             >
-             { loading ? <ClipLoader size={30} color='white'/>: Save}
+             { loading ? <ClipLoader size={30} color='white'/>:"Save"}
             </button>
           </div>
         </form>

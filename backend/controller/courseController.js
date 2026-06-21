@@ -61,7 +61,7 @@ export const editCourse = async (req,res) => {
         const updateData =  {title,subtitle,description,category,level,price}
          if (thumbnail) updateData.thumbnail = thumbnail
 
-        course = await Course.findByIdAndUpdate(courseId,updateData,{new:true})
+         const course = await Course.findByIdAndUpdate(courseId,updateData,{new:true})
         return res.status(200).json(course)
 
     } catch (error) {
@@ -86,10 +86,11 @@ export const getCourseById = async (req,res) => {
 export const removeCourse = async (req,res) => {
     try {
         const {courseId} = req.params
-          if(!courses){
+         const course = await Course.findById(courseId)
+          if(!course){
             return res.status(400).json({message:"Courses is not found"})
         }
-        course = await Course.findById(courseId,updateData,{ne:true})
+         await Course.findById(courseId)
         return res.status(200).json({message:"course removed "})
     } catch (error) {
         return res.status(500).json({message:`failed to edit course ${error}`})

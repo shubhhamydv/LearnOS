@@ -69,7 +69,7 @@ function Courses() {
                                     :<td className='px-4 py-3 '> ₹ NA </td>}
                                     <td className='px-4 py-3 '><span className={`px-3 py-1 rounded-full text-xs ${course?.isPublished ? "bg-green-100 text-green-600" :"bg-red-100 text-red-600"} `}>{course?.isPublished? "Published" : "Draft"}</span></td>
                                     <td className='px-4 py-3 '>
-                                        <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>navigate(`/editcourse/${course?._id} `)} />
+                                        <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>navigate(`/editcourse/${course?._id}`)} />
                                     </td>
 
                                 </tr>
@@ -90,7 +90,7 @@ function Courses() {
                                 <h2 className='font-medium text-sm'>₹ {course.title}</h2>
                                {course?.price ? <p className='text-gray-600 text-xs mt-1'>{course?.price}</p> : <p className='text-gray-600 text-xs mt-1'>₹ NA</p> }
                             </div>
-                            <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>navigate(`/editcourse/${course?._id} `)} />
+                            <FaEdit className='text-gray-600 hover:text-blue-600 cursor-pointer' onClick={()=>navigate(`/editcourse/${course?._id}`)} />
                         </div>
                         <span className={`w-fit px-3 py-1 text-xs rounded-full ${course?.isPublished ? "bg-green-100 text-green-600" : "bg-red-100 text-red-600"} `}>{course?.isPublished ? "Published":"Draft"}</span>
                     </div>))}
