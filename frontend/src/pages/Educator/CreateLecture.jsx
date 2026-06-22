@@ -150,4 +150,4 @@ function CreateLecture() {
   )
 }
 
-export default Createlecture
+export default CreateLecture
