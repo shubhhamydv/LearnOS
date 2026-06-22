@@ -1,5 +1,6 @@
 import uploadOnCloudinary from "../config/cloudinary.js"
 import Course from "../model/courseModel.js"
+import Lecture from  '../model/lectureModel.js'
 
 export const createCourse = async (req, res) => {
     try {
@@ -101,9 +102,9 @@ export const removeCourse = async (req,res) => {
 
 export const createLecture = async (req,res)=>{
     try {
-        const {lectureTitle} req.body
+        const {lectureTitle} = req.body
         const {courseId} = req.params
-        if(lectureTitle || courseId){
+        if(!lectureTitle || !courseId){
         return res.status(400).json({message:"lectureTitle is required"})
 
         }

@@ -6,7 +6,7 @@ import { setCourseData } from '../redux/courseSlice'
 import { useDispatch } from 'react-redux'
 
 const getPublishedCourse = () => {
-    const dispatch = useDispatch
+    const dispatch = useDispatch()
 
    useEffect(()=>{
     const getCourseData = async() =>{
