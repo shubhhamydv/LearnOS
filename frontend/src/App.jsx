@@ -21,6 +21,7 @@ import CreateLecture from './pages/Educator/CreateLecture'
 import EditLecture from './pages/Educator/EditLecture'
 import ViewCourse from './pages/ViewCourse'
 import ScrollToTop from './component/ScrollToTop'
+import ViewLectures from './pages/ViewLectures'
 
 function App() {
 
@@ -54,6 +55,8 @@ function App() {
          <Route path='/editlecture/:courseId/:lectureId' element={userData?.role === "educator" ? <EditLecture /> : <Navigate to={"/signup"} />} />
 
          <Route path='/viewcourse/:courseId' element={userData?.role === "educator" ? <ViewCourse /> : <Navigate to={"/signup"} />} />
+         <Route path='/viewlecture/:courseId' element={userData?.role === "educator" ? <ViewLectures /> : <Navigate to={"/signup"} />} />
+
 
 
 
