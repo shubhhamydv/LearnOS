@@ -20,40 +20,42 @@ function CreateLecture() {
 
   const lectureState = useSelector((state) => state.lecture)
   const lectureData = lectureState?.lectureData || []
-
-  const handleCreateLecture = async () => {
-    if (!lectureTitle.trim()) {
-      toast.error("Please enter lecture title")
-      return
-    }
-
-    setLoading(true)
-
-    try {
-      const result = await axios.post(
-        `${serverUrl}/api/course/createlecture/${courseId}`,
-        { lectureTitle },
-        { withCredentials: true }
-      )
-
-      console.log(result.data)
-
-      dispatch(
-        setLectureData([...lectureData, result.data.lecture])
-      )
-
-      toast.success("Lecture Added")
-      setLectureTitle("")
-    } catch (error) {
-      console.log(error)
-
-      toast.error(
-        error?.response?.data?.message || "Something went wrong"
-      )
-    } finally {
-      setLoading(false)
-    }
+const handleCreateLecture = async () => {
+  if (!lectureTitle.trim()) {
+    toast.error("Please enter lecture title")
+    return
   }
+
+  setLoading(true)
+
+  try {
+    const result = await axios.post(
+      `${serverUrl}/api/course/createlecture/${courseId}`,
+      {
+        lectureTitle,
+        category: "Programming"
+      },
+      { withCredentials: true }
+    )
+
+    console.log(result.data)
+
+    dispatch(
+      setLectureData([...lectureData, result.data.lecture])
+    )
+
+    toast.success("Lecture Added")
+    setLectureTitle("")
+  } catch (error) {
+    console.log(error)
+
+    toast.error(
+      error?.response?.data?.message || "Something went wrong"
+    )
+  } finally {
+    setLoading(false)
+  }
+}
 
   useEffect(() => {
     const getCourseLecture = async () => {
