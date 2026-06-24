@@ -35,7 +35,7 @@ export const createReview = async (req,res) => {
 
 export const getReviews = async (req,res) => {
     try {
-        const review = (await Review.find({}).populate("user","name ,photoUrl,role")).toSorted({reviewedAt : -1})
+        const review = (await Review.find({}).populate("course", "user" )).toSorted({reviewedAt : -1})
         return res.status(200).json(review)
         
     } catch (error) {
