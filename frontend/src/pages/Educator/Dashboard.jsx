@@ -1,7 +1,8 @@
 import React from 'react'
 import { useSelector } from 'react-redux'
 import { useNavigate } from 'react-router-dom'
-import { FaArrowLeftLong } from 'react-icons/fa6'
+import { FaArrowLeftLong } from 'react-icons/fa6';
+import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis, YAxis, ChartesianGrid } from "recharts"
 
 function Dashboard() {
 
@@ -10,14 +11,16 @@ function Dashboard() {
     const {creatorCourseData} = useSelector(state=>state.course)
 
     const CourseProgressData = creatorCourseData?.map((course)=>({
-      name:course.title.slice(0,10)+ "...",
+      name:course.title?.slice(0,10)+ "...",
       lectures:course.lectures?.length || 0
     })) || [];
 
        const enrollData = creatorCourseData?.map((course)=>({
-      name:course.title.slice(0,10)+ "...",
+      name:course.title?.slice(0,10)+ "...",
       enrolled:course.enrollledStudent?.length || 0
     })) || [];
+
+    
 
   return (
     <div className='flex min-h-screen bg-gray-100'>
@@ -41,6 +44,49 @@ function Dashboard() {
         </div>
         <div >
          {/* graph section */}
+         <div className='max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8'>
+          {/* {{for course Progress graph}} */}
+          <div className='bg-white rounded-lg shadow-md p-6'>
+            <h2 className='text-lg font-semibold mb-4'>
+              Course Progress (Lectures)
+
+            </h2>
+            <ResponsiveContainer width= "100%" height={300}>
+              <BarChart data={CourseProgressData}>
+                <ChartesianGrid strokeDasharray = " 3 3"/>
+                <XAxis dataKey="name" />
+                <YAxis/>
+                <Tooltip/>
+                <Bar dataKey="lectures" fill='black' radius={[5,5,0,0]} />
+
+              </BarChart>
+
+            </ResponsiveContainer>
+
+          </div>
+
+          {/* Enrolled Data */}
+
+           <div className='bg-white rounded-lg shadow-md p-6'>
+            <h2 className='text-lg font-semibold mb-4'>
+               Students Enrollment (Lectures)
+
+            </h2>
+            <ResponsiveContainer width= "100%" height={300}>
+              <BarChart data={EnrollData}>
+                <ChartesianGrid strokeDasharray = " 3 3"/>
+                <XAxis dataKey="name" />
+                <YAxis/>
+                <Tooltip/>
+                <Bar dataKey="enrolled" fill='black' radius={[5,5,0,0]} />
+
+              </BarChart>
+
+            </ResponsiveContainer>
+
+          </div>
+
+         </div>
 
         </div>
 

@@ -12,7 +12,7 @@ import axios from 'axios'
 import { serverUrl } from '../App'
 import Card from '../component/Card'
 import { toast } from 'react-toastify'
-import { useDispatch } from "react-redux";
+ 
 
 function ViewCourse() {
   const navigate = useNavigate()
