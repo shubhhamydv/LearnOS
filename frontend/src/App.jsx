@@ -23,12 +23,14 @@ import ViewCourse from './pages/ViewCourse'
 import ScrollToTop from './component/ScrollToTop'
 import ViewLectures from './pages/ViewLectures'
 import MyEnrolledCourses from './pages/MyEnrolledCourses'
+import getAllReviews from './customHooks/getAllReviews'
 
 function App() {
 
   getCurrentUser()
   getCreatorCourse()
   getPublishedCourse()
+  getAllReviews()
    
   const { userData } = useSelector(state => state.user)
   return (
