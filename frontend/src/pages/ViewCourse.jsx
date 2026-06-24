@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import { FaArrowLeftLong } from 'react-icons/fa6'
-import { useSelector } from 'react-redux'
-import { Navigate, useNavigate, useParams } from 'react-router-dom'
-import { setcreatorCourseData, setSelectedCourse } from '../redux/courseSlice'
+import { useSelector, useDispatch } from 'react-redux' // FIXED: useDispatch import missing tha
+import { useNavigate, useParams } from 'react-router-dom'
+import { setSelectedCourse } from '../redux/courseSlice'
 import { useEffect } from 'react'
 import img from "../assets/empty.jpg"
 import { FaStar } from "react-icons/fa6";
@@ -27,8 +27,7 @@ function ViewCourse() {
     const handleCreator = async () => {
       try {
         if(selectedCourse?.creator){
-       const result  = await axios.post(serverUrl +"/api/course/creator " ,{userId:selectedCourse?.creator},{withCredentials:true}
-       )
+       const result  = await axios.post(serverUrl +"/api/course/creator",{userId:selectedCourse?.creator},{withCredentials:true}) // FIXED: trailing space remove kiya URL me
        console.log(result.data)
        setCreatorData(result.data)
     }
@@ -53,10 +52,10 @@ function ViewCourse() {
   },[courseData,courseId])
 
   useEffect(()=>{
-    if(creatorData?.id && courseData.lecture > 0){
+    if(creatorData?._id && selectedCourse?.lectures?.length > 0){ // FIXED: creatorData?.id -> creatorData?._id, courseData.lecture -> selectedCourse?.lectures?.length
       const creatorCourse = courseData.filter((course)=>course.creator === creatorData?._id && course._id !== courseId)
+      setCreatorCourses(creatorCourse) // FIXED: setCreatorCourses bahar tha, aur variable name typo tha (creaotrCourse -> creatorCourse)
     }
-    setCreatorCourses(creaotrCourse)
   },[creatorData,courseData])
 
   return (
@@ -67,7 +66,7 @@ function ViewCourse() {
           {/* thumbnail*/}
 
           <div className='w-full md:w-1/2'>
-         < FaArrowLeftLong className='text-[black] w-[22px] h-[22px] cursor-pointer ' onClick={()=>Navigate("/")}/>
+         < FaArrowLeftLong className='text-[black] w-[22px] h-[22px] cursor-pointer ' onClick={()=>navigate("/")}/>  {/* FIXED: Navigate() -> navigate() (component nahi, hook ka function hai) */}
          {
   selectedCourse?.thumbnail ? (
     <img
@@ -137,12 +136,12 @@ function ViewCourse() {
      <div className='bg-white w-full md:w-2/5 p-6 rounded-2x1
       shadow-lg border border-gray-200'>
         <h2 className='text-x1 font-bold mb-4'>Course Curriculum</h2>
-        <p className='text-sm text-gray-500 mb-4'>{selectedCourse?.lectures?.length} Leatures</p>
+        <p className='text-sm text-gray-500 mb-4'>{selectedCourse?.lectures?.length} Lectures</p>
 
         <div className=' flex flex-col gap-3'>
           {selectedCourse?.lectures?.map((lecture,index)=>(
             <button key={index} onClick={()=>{
-              if(!lecture.isPreviewFree){
+              if(lecture.isPreviewFree){ // FIXED: !lecture.isPreviewFree tha, isliye free lectures click nahi hote the
                 setSelectedLecture(lecture)
               }
             }}
@@ -169,12 +168,12 @@ function ViewCourse() {
         <div className='flex gap-1 mb-2'>
            {
             [1,2,3,4,5].map((star)=>{
-              <FaStar key={star}className='fill-gray-300'/>
+              return <FaStar key={star} className='fill-yellow-400 text-yellow-400'/> // FIXED: return missing tha, isliye stars render nahi ho rahe the
             })
            }
         </div>
-        <textarea name="" id=""className='w-full border border-gray-300 rounded-lg p-2' placeholder=' Write your review here...'
-         row={3}
+        <textarea name="" id="" className='w-full border border-gray-300 rounded-lg p-2' placeholder=' Write your review here...'
+         rows={3}
         />
         <button className='bg-black text-white mt-3 px-4 py-2 hover:bg-gray-800 '>Submit Review</button>
         
@@ -199,7 +198,7 @@ function ViewCourse() {
 
           {
             creaotrCourses?.map((course,index)=>(
-              <Card thumbnail={course.thumbnail} id={course._id} price={course.price} category={course.category}/>
+              <Card key={index} thumbnail={course.thumbnail} id={course._id} price={course.price} category={course.category}/>
             ))
           }
         </div>

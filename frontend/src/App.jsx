@@ -53,11 +53,8 @@ function App() {
 
          <Route path='/editlecture/:courseId/:lectureId' element={userData?.role === "educator" ? <EditLecture /> : <Navigate to={"/signup"} />} />
 
-         <Route path='/viewcourse/:courseId' element={userData?.role === "educator" ? <ViewCourse /> : <Navigate to={"/signup"} />} />
-
-
-
-
+         {/* FIXED: viewcourse sirf educators ke liye tha — ab koi bhi logged-in user dekh sakta hai */}
+         <Route path='/viewcourse/:courseId' element={userData ? <ViewCourse /> : <Navigate to={"/signup"} />} />
 
       </Routes>
 

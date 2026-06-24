@@ -14,6 +14,12 @@ const userSchema = new mongoose.Schema(
         ref: "Course"
       }
     ],
+    enrolledCourses: [ // FIXED: orderController enrolledCourses use karta hai, field missing thi
+      {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: "Course"
+      }
+    ],
     resetOtp: {
       type: String
     },

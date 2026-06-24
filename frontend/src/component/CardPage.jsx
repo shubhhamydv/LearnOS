@@ -2,12 +2,13 @@ import React from 'react'
 import { useEffect } from 'react'
 import { useState } from 'react'
 import { useSelector } from 'react-redux'
+import Card from './Card' // FIXED: Card import missing tha
 
 function CardPage(){
     const { courseData } = useSelector(state=>state.course)
     const [popularCourses,setPopularCourses] = useState([])
 
-    useEffect(()=>{
+    useEffect(()=>{ 
         setPopularCourses(courseData?.slice(0,6));
 
     },[courseData])
