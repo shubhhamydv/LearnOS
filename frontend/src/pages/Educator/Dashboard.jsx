@@ -7,6 +7,18 @@ function Dashboard() {
 
     const {userData} = useSelector(state=>state.user)
     const navigate = useNavigate()
+    const {creatorCourseData} = useSelector(state=>state.course)
+
+    const CourseProgressData = creatorCourseData?.map((course)=>({
+      name:course.title.slice(0,10)+ "...",
+      lectures:course.lectures?.length || 0
+    })) || [];
+
+       const enrollData = creatorCourseData?.map((course)=>({
+      name:course.title.slice(0,10)+ "...",
+      enrolled:course.enrollledStudent?.length || 0
+    })) || [];
+
   return (
     <div className='flex min-h-screen bg-gray-100'>
         <FaArrowLeftLong className='w-[22px] absolute top-[10%] left-[10%] h-[22px] cursor-pointer ' onClick={()=>navigate("/")}/>

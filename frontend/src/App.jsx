@@ -21,6 +21,8 @@ import CreateLecture from './pages/Educator/CreateLecture'
 import EditLecture from './pages/Educator/EditLecture'
 import ViewCourse from './pages/ViewCourse'
 import ScrollToTop from './component/ScrollToTop'
+import ViewLectures from './pages/ViewLectures'
+import MyEnrolledCourses from './pages/MyEnrolledCourses'
 
 function App() {
 
@@ -53,8 +55,15 @@ function App() {
 
          <Route path='/editlecture/:courseId/:lectureId' element={userData?.role === "educator" ? <EditLecture /> : <Navigate to={"/signup"} />} />
 
-         {/* FIXED: viewcourse sirf educators ke liye tha — ab koi bhi logged-in user dekh sakta hai */}
-         <Route path='/viewcourse/:courseId' element={userData ? <ViewCourse /> : <Navigate to={"/signup"} />} />
+         <Route path='/viewcourse/:courseId' element={userData?.role === "educator" ? <ViewCourse /> : <Navigate to={"/signup"} />} />
+
+
+
+         <Route path='/viewlecture/:courseId' element={userData?.role === "educator" ? <ViewLectures /> : <Navigate to={"/signup"} />} />
+
+         
+         <Route path='/mycourses' element={userData?.role === "educator" ? <MyEnrolledCourses /> : <Navigate to={"/signup"} />} />
+
 
       </Routes>
 
