@@ -4,6 +4,7 @@ import express from "express"
 import {createCourse, createLecture, editCourse, editLecture, getCourseById, getCourseLecture, getCreateCourses, getCreatorById, getPublishedCourses, removeCourse, removeLecture } from "../controller/courseController.js"
 import isAuth from '../middleware/isAuth.js'
 import upload from "../model/multer.js"
+import { searchWithAi } from "../controller/searchController.js"
 
 const courseRouter = express.Router()
 //for courses
@@ -21,4 +22,7 @@ courseRouter.post("/editlecture/:lectureId", isAuth, upload.single("videoUrl"),e
 courseRouter.delete("/removelecture/:lectureId", isAuth, removeLecture)
 courseRouter.post("/creator",isAuth,getCreatorById)
 
+
+// for search
+courseRouter.post("/search",searchWithAi)
 export default courseRouter

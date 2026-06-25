@@ -24,6 +24,7 @@ import ScrollToTop from './component/ScrollToTop'
 import ViewLectures from './pages/ViewLectures'
 import MyEnrolledCourses from './pages/MyEnrolledCourses'
 import getAllReviews from './customHooks/getAllReviews'
+import SearchWithAi from './pages/SearchWithAi'
 
 function App() {
 
@@ -66,6 +67,7 @@ function App() {
          
          <Route path='/mycourses' element={userData?.role === "educator" ? <MyEnrolledCourses /> : <Navigate to={"/signup"} />} />
 
+ <Route path='/search' element={userData?.role === "educator" ? <SearchWithAi /> : <Navigate to={"/search"} />} />
 
       </Routes>
 
